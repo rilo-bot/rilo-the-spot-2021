@@ -135,6 +135,17 @@ export interface SavedResource {
   savedAt: string;
 }
 
+// ── feature: contact — Contact & Support Space ──
+
+export interface ContactMessage {
+  id: string;
+  userId?: string | null;
+  name: string;
+  email: string;
+  message: string;
+  createdAt: string;
+}
+
 export interface ApiContract {
   "auth-signup": { method: "POST"; path: "/api/auth/signup"; request: { email: string; password: string; displayName?: string }; response: { token: string; user: User } };
   "auth-login": { method: "POST"; path: "/api/auth/login"; request: { email: string; password: string }; response: { token: string; user: User } };
@@ -156,6 +167,8 @@ export interface ApiContract {
   "list-saved-resources": { method: "GET"; path: "/api/mindfulness/saved"; request: void; response: SavedResource[] };
   "save-resource": { method: "POST"; path: "/api/mindfulness/saved"; request: { resourceId: string }; response: SavedResource };
   "unsave-resource": { method: "DELETE"; path: "/api/mindfulness/saved/:resourceId"; request: void; response: void };
+  "send-contact-message": { method: "POST"; path: "/api/contact"; request: { name: string, email: string, message: string }; response: { success: boolean } };
+  "get-contact-messages": { method: "GET"; path: "/api/contact/messages"; request: void; response: ContactMessage[] };
 }
 
 export const API_ROUTES = {
@@ -179,4 +192,6 @@ export const API_ROUTES = {
   "list-saved-resources": { method: "GET", path: "/api/mindfulness/saved" },
   "save-resource": { method: "POST", path: "/api/mindfulness/saved" },
   "unsave-resource": { method: "DELETE", path: "/api/mindfulness/saved/:resourceId" },
+  "send-contact-message": { method: "POST", path: "/api/contact" },
+  "get-contact-messages": { method: "GET", path: "/api/contact/messages" },
 } as const;

@@ -5,6 +5,7 @@ import { createWellnessRouter } from './wellness';
 import { createHabitsRouter } from './habits';
 import { createSpotsRouter } from './spots';
 import { createMindfulnessRouter } from './mindfulness';
+import { createContactRouter } from './contact';
 
 /**
  * Register every API route here.
@@ -22,4 +23,5 @@ export function registerRoutes(app: Express, db: Db): void {
   app.use('/api/habits', createHabitsRouter(db));
   app.use('/api/spots', createSpotsRouter(db));
   app.use('/api/mindfulness', createMindfulnessRouter(db));
+  app.use('/api/contact', createContactRouter(db));
 }
